@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Fichepv</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ fichePv.id }}</td>
+            </tr>
+            <tr>
+                <th>Cinpass</th>
+                <td>{{ fichePv.cinPass }}</td>
+            </tr>
+            <tr>
+                <th>Nompass</th>
+                <td>{{ fichePv.nomPass }}</td>
+            </tr>
+            <tr>
+                <th>Prenompass</th>
+                <td>{{ fichePv.prenomPass }}</td>
+            </tr>
+            <tr>
+                <th>Adressepass</th>
+                <td>{{ fichePv.adressePass }}</td>
+            </tr>
+            <tr>
+                <th>Datepv</th>
+                <td>{% if fichePv.datePv %}{{ fichePv.datePv|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Numtrain</th>
+                <td>{{ fichePv.numTrain }}</td>
+            </tr>
+            <tr>
+                <th>Montantpv</th>
+                <td>{{ fichePv.montantPv }}</td>
+            </tr>
+            <tr>
+                <th>Matriculecont</th>
+                <td>{{ fichePv.matriculeCont }}</td>
+            </tr>
+            <tr>
+                <th>Lieucontrole</th>
+                <td>{{ fichePv.lieuControle }}</td>
+            </tr>
+            <tr>
+                <th>Classe</th>
+                <td>{{ fichePv.classe }}</td>
+            </tr>
+            <tr>
+                <th>Distinationreele</th>
+                <td>{{ fichePv.distinationReele }}</td>
+            </tr>
+            <tr>
+                <th>Typeabonn</th>
+                <td>{{ fichePv.typeAbonn }}</td>
+            </tr>
+            <tr>
+                <th>Durestationnement</th>
+                <td>{{ fichePv.dureStationnement }}</td>
+            </tr>
+            <tr>
+                <th>Datefinabon</th>
+                <td>{% if fichePv.dateFinAbon %}{{ fichePv.dateFinAbon|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('fichepv_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('fichepv_edit', { 'id': fichePv.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

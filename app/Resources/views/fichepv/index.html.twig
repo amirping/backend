@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Fichepvs list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Cinpass</th>
+                <th>Nompass</th>
+                <th>Prenompass</th>
+                <th>Adressepass</th>
+                <th>Datepv</th>
+                <th>Numtrain</th>
+                <th>Montantpv</th>
+                <th>Matriculecont</th>
+                <th>Lieucontrole</th>
+                <th>Classe</th>
+                <th>Distinationreele</th>
+                <th>Typeabonn</th>
+                <th>Durestationnement</th>
+                <th>Datefinabon</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fichePv in fichePvs %}
+            <tr>
+                <td><a href="{{ path('fichepv_show', { 'id': fichePv.id }) }}">{{ fichePv.id }}</a></td>
+                <td>{{ fichePv.cinPass }}</td>
+                <td>{{ fichePv.nomPass }}</td>
+                <td>{{ fichePv.prenomPass }}</td>
+                <td>{{ fichePv.adressePass }}</td>
+                <td>{% if fichePv.datePv %}{{ fichePv.datePv|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ fichePv.numTrain }}</td>
+                <td>{{ fichePv.montantPv }}</td>
+                <td>{{ fichePv.matriculeCont }}</td>
+                <td>{{ fichePv.lieuControle }}</td>
+                <td>{{ fichePv.classe }}</td>
+                <td>{{ fichePv.distinationReele }}</td>
+                <td>{{ fichePv.typeAbonn }}</td>
+                <td>{{ fichePv.dureStationnement }}</td>
+                <td>{% if fichePv.dateFinAbon %}{{ fichePv.dateFinAbon|date('Y-m-d') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('fichepv_show', { 'id': fichePv.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('fichepv_edit', { 'id': fichePv.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('fichepv_new') }}">Create a new fichePv</a>
+        </li>
+    </ul>
+{% endblock %}
