@@ -77,4 +77,4 @@ fos_user:
         sender_name: "SNCFT"
     registration:
         form:
-            name: app_user_registration
+            type: AppBundle\Form\RegistrationType
