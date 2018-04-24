@@ -18,10 +18,20 @@ security:
                 csrf_token_generator: security.csrf.token_manager # Use form.csrf_provider instead for Symfony <2.4
             logout:       true
             anonymous:    true
+        oauth_token:                                   # Everyone can access the access token URL.
+            pattern: ^/oauth/v2/token
+            security: false
+        api:
+            pattern: ^/                                # All URLs are protected
+            fos_oauth: true                            # OAuth2 protected resource
+            stateless: true                            # Do no set session cookies
+            anonymous: false                           # Anonymous access is not allowed    
 
     encoders:
         FOS\UserBundle\Model\UserInterface: sha512
 
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
+        ROLE_CONTROLLEUR: ROLE_USER
+        ROLE_ADMIN_COMMERCIAL: ROLE_MANAGER
+        ROLE_ADMIN_JUREDIQUE: ROLE_MANAGER
         ROLE_SUPER_ADMIN: ROLE_ADMIN

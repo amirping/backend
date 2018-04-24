@@ -94,7 +94,7 @@ class FichePv
     /**
      * @var string
      *
-     * @ORM\Column(name="destination_reele", type="string", length=255, nullable=true)
+     * @ORM\Column(name="distination_reele", type="string", length=255, nullable=true)
      */
     private $destinationReele;
 
@@ -392,7 +392,7 @@ class FichePv
     }
 
     /**
-     * Get destinationReele
+     * Get distinationReele
      *
      * @return string
      */
@@ -472,28 +472,5 @@ class FichePv
     {
         return $this->dateFinAbon;
     }
-
-    /**
-     * Set type
-     *
-     * @param integer $type
-     *
-     * @return FichePV
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return integer
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
 }
+

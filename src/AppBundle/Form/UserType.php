@@ -5,6 +5,12 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
 
 class UserType extends AbstractType
 {
@@ -13,7 +19,32 @@ class UserType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('matricule')->add('nom')->add('prenom')->add('adresse')->add('cin')->add('tel');
+        $builder->add('matricule')->add('nom')->add('prenom')->add('adresse')->add('cin')->add('tel')
+        ->add('email', EmailType::class, array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle'))
+        ->add('username', null, array('label' => 'form.username', 'translation_domain' => 'FOSUserBundle'))
+        ->add('plainPassword', RepeatedType::class, array(
+            'type' => PasswordType::class,
+            'options' => array(
+                'translation_domain' => 'FOSUserBundle',
+                'attr' => array(
+                    'autocomplete' => 'new-password',
+                ),
+            ),
+            'first_options' => array('label' => 'form.password'),
+            'second_options' => array('label' => 'form.password_confirmation'),
+            'invalid_message' => 'fos_user.password.mismatch',
+        ))
+        ->add('roles', ChoiceType::class, [
+            'multiple' => true,
+            'choices' => [
+                'ROLE_CONTROLLEUR' => 'ROLE_USER',
+                'ROLE_ADMIN_COMMERCIAL' => 'ROLE_MANAGER',
+                'ROLE_ADMIN_JUREDIQUE' => 'ROLE_MANAGER',
+                'ROLE_SUPER_ADMIN' => 'ROLE_ADMIN',
+            ]
+            
+        ]);
+        ;
     }/**
      * {@inheritdoc}
      */
@@ -31,6 +62,18 @@ class UserType extends AbstractType
     {
         return 'appbundle_user';
     }
+
+    /* get all roles*/
+ /*   public function getExistingRoles()
+{
+    $roleHierarchy = $container->getParameter('security.role_hierarchy.roles');
+    $roles = array_keys($roleHierarchy);
+
+    foreach ($roles as $role) {
+        $theRoles[$role] = $role;
+    }
+    return $theRoles;
+}*/
 
 
 }

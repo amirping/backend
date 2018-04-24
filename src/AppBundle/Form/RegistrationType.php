@@ -16,6 +16,7 @@ class RegistrationType extends AbstractType
         $builder->add('prenom');
         $builder->add('cin');
         $builder->add('adresse');
+       
     }
 
     public function getParent()
