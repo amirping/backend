@@ -7,6 +7,7 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Matricule</th>
                 <th>Contenu</th>
                 <th>Lieu</th>
                 <th>Date</th>
@@ -17,6 +18,7 @@
         {% for reclamation in reclamations %}
             <tr>
                 <td><a href="{{ path('reclamation_show', { 'id': reclamation.id }) }}">{{ reclamation.id }}</a></td>
+                <td>{{ reclamation.idControler.matricule }}</td>
                 <td>{{ reclamation.contenu }}</td>
                 <td>{{ reclamation.lieu }}</td>
                 <td>{% if reclamation.date %}{{ reclamation.date|date('Y-m-d') }}{% endif %}</td>
