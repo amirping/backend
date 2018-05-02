@@ -1,4 +1,10 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+
+   <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+  <script src="{{ asset('js/jquery.min.js') }}"></script>
+  <script src="{{ asset('js/bootstrap.js') }}"></script>
+{% endblock %}
 
 {% block body %}
     <h1>Fichepv</h1>
@@ -10,28 +16,8 @@
                 <td>{{ fichePv.id }}</td>
             </tr>
             <tr>
-                <th>Cinpass</th>
-                <td>{{ fichePv.cinPass }}</td>
-            </tr>
-            <tr>
-                <th>Nompass</th>
-                <td>{{ fichePv.nomPass }}</td>
-            </tr>
-            <tr>
-                <th>Prenompass</th>
-                <td>{{ fichePv.prenomPass }}</td>
-            </tr>
-            <tr>
-                <th>Adressepass</th>
-                <td>{{ fichePv.adressePass }}</td>
-            </tr>
-            <tr>
                 <th>Datepv</th>
                 <td>{% if fichePv.datePv %}{{ fichePv.datePv|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Numtrain</th>
-                <td>{{ fichePv.numTrain }}</td>
             </tr>
             <tr>
                 <th>Montantpv</th>
@@ -60,6 +46,10 @@
             <tr>
                 <th>Durestationnement</th>
                 <td>{{ fichePv.dureStationnement }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ fichePv.type }}</td>
             </tr>
             <tr>
                 <th>Datefinabon</th>

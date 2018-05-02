@@ -22,10 +22,38 @@ class FichePv
     private $id;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="cin_pass", type="integer")
+     */
+    private $cinPass;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Passager", inversedBy="fichepvs")
      * @ORM\JoinColumn(name="id_passager", referencedColumnName="id")
      */
     private $idPass;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom_pass", type="string", length=255)
+     */
+    private $nomPass;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prenom_pass", type="string", length=255)
+     */
+    private $prenomPass;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="adresse_pass", type="string", length=255)
+     */
+    private $adressePass;
 
     /**
      * @var \DateTime
@@ -35,10 +63,11 @@ class FichePv
     private $datePv;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Train", inversedBy="trainidfiche")
-     * @ORM\JoinColumn(name="numero_train", referencedColumnName="id")
+     * @var int
+     *
+     * @ORM\Column(name="num_train", type="integer")
      */
-     private $numeroTrain;
+    private $numTrain;
 
     /**
      * @var float
@@ -237,18 +266,17 @@ class FichePv
     /**
      * Set numTrain
      *
-     * @param \AppBundle\Entity\Train $numTrain
+     * @param integer $numTrain
      *
-     * @return Train
+     * @return FichePv
      */
-    public function setNumTrain(\AppBundle\Entity\Train $numTrain = null)
+    public function setNumTrain($numTrain)
     {
         $this->numTrain = $numTrain;
 
         return $this;
     }
 
-    
     /**
      * Get numTrain
      *
@@ -473,77 +501,5 @@ class FichePv
     public function getType()
     {
         return $this->type;
-    }
-
-    /**
-     * Set idPass
-     *
-     * @param \AppBundle\Entity\Passager $idPass
-     *
-     * @return FichePv
-     */
-    public function setIdPass(\AppBundle\Entity\Passager $idPass = null)
-    {
-        $this->idPass = $idPass;
-
-        return $this;
-    }
-
-    /**
-     * Get idPass
-     *
-     * @return \AppBundle\Entity\Passager
-     */
-    public function getIdPass()
-    {
-        return $this->idPass;
-    }
-
-    /**
-     * Set idTrain
-     *
-     * @param \AppBundle\Entity\Train $idTrain
-     *
-     * @return FichePv
-     */
-    public function setIdTrain(\AppBundle\Entity\Train $idTrain = null)
-    {
-        $this->idTrain = $idTrain;
-
-        return $this;
-    }
-
-    /**
-     * Get idTrain
-     *
-     * @return \AppBundle\Entity\Train
-     */
-    public function getIdTrain()
-    {
-        return $this->idTrain;
-    }
-
-    /**
-     * Set numeroTrain
-     *
-     * @param \AppBundle\Entity\Train $numeroTrain
-     *
-     * @return FichePv
-     */
-    public function setNumeroTrain(\AppBundle\Entity\Train $numeroTrain = null)
-    {
-        $this->numeroTrain = $numeroTrain;
-
-        return $this;
-    }
-
-    /**
-     * Get numeroTrain
-     *
-     * @return \AppBundle\Entity\Train
-     */
-    public function getNumeroTrain()
-    {
-        return $this->numeroTrain;
     }
 }

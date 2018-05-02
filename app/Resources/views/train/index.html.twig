@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Trains list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Numero</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for train in trains %}
+            <tr>
+                <td><a href="{{ path('train_show', { 'id': train.id }) }}">{{ train.id }}</a></td>
+                <td>{{ train.numero }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('train_show', { 'id': train.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('train_edit', { 'id': train.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('train_new') }}">Create a new train</a>
+        </li>
+    </ul>
+{% endblock %}

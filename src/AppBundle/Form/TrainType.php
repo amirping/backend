@@ -6,21 +6,21 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class FichePvType extends AbstractType
+class TrainType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('datePv')->add('montantPv')->add('matriculeCont')->add('lieuControle')->add('classe')->add('destinationReele')->add('typeAbonn')->add('dureStationnement')->add('type')->add('dateFinAbon')->add('idPass')->add('numeroTrain');
+        $builder->add('numero');
     }/**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\FichePv'
+            'data_class' => 'AppBundle\Entity\Train'
         ));
     }
 
@@ -29,7 +29,7 @@ class FichePvType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'appbundle_fichepv';
+        return 'appbundle_train';
     }
 
 
