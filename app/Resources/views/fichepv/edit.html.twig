@@ -1,18 +1,27 @@
-{% extends 'base.html.twig' %}
-{% block stylesheets %}
+{% extends 'baseAdmin.html.twig' %}
+{# {% block stylesheets %}
 
    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
   <script src="{{ asset('js/jquery.min.js') }}"></script>
   <script src="{{ asset('js/bootstrap.js') }}"></script>
-{% endblock %}
+{% endblock %} #}
 
-{% block body %}
-    <h1>Fichepv edit</h1>
+{% block pagecontent %}
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
+<div class="box box-info">
+    <div class="box-header with-border">
+        <h3 class="box-title">Edit Fichepv</h3>
+    </div>
+        {{ form_start(edit_form) }}
+         <div class="box-body">
+         {{ form_widget(edit_form) }}
+         </div>
+            <div class="box-footer">
+            <input type="submit" value="Edit" class="btn btn-info pull-right" />
+            </div>
+        {{ form_end(edit_form) }}
+</div>
+
 
     <ul>
         <li>
@@ -20,7 +29,9 @@
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+            <div class="box-footer">
+                <input type="submit" value="Delete" class="btn btn-danger">
+                </div>
             {{ form_end(delete_form) }}
         </li>
     </ul>

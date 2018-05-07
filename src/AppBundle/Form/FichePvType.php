@@ -13,7 +13,18 @@ class FichePvType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('datePv')->add('montantPv')->add('matriculeCont')->add('lieuControle')->add('classe')->add('destinationReele')->add('typeAbonn')->add('dureStationnement')->add('type')->add('dateFinAbon')->add('idPass')->add('numeroTrain');
+        $builder->add('datePv')
+        ->add('montantPv')
+        ->add('matriculeCont')
+        ->add('lieuControle')
+        ->add('classe')
+        ->add('destinationReele')
+        ->add('typeAbonn')
+        ->add('dureStationnement')
+        ->add('type')
+        ->add('dateFinAbon')
+        ->add('idPass')
+        ->add('numeroTrain');
     }/**
      * {@inheritdoc}
      */

@@ -1,11 +1,18 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseAdmin.html.twig' %}
 
-{% block body %}
-    <h1>Reclamation edit</h1>
+{% block pagecontent %}
+<div class="box box-info">
+    <div class="box-header with-border">
+    <h1 class="box-title">Reclamation edit</h1>
+    </div>
 
     {{ form_start(edit_form) }}
+    <div class="box-body">
         {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
+        </div>
+        <div class="box-footer">
+        <input type="submit" value="Edit" class="btn btn-info pull-right" />
+        </div>
     {{ form_end(edit_form) }}
 
     <ul>
@@ -14,7 +21,9 @@
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+            <div class="box-footer">
+                <input type="submit" value="Delete" class="btn btn-danger">
+                </div>
             {{ form_end(delete_form) }}
         </li>
     </ul>
