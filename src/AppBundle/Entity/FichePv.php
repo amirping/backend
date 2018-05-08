@@ -103,6 +103,14 @@ class FichePv
      */
     private $dateFinAbon;
 
+    /**
+     * @var \boolean
+     *
+     * @ORM\Column(name="etat_pv", type="boolean", nullable=true, options={"default":false})
+     */
+    private $etatPv;
+
+
 
     /**
      * Get id
@@ -545,5 +553,29 @@ class FichePv
     public function getNumeroTrain()
     {
         return $this->numeroTrain;
+    }
+
+    /**
+     * Set etatPv
+     *
+     * @param boolean $etatPv
+     *
+     * @return FichePv
+     */
+    public function setEtatPv($etatPv)
+    {
+        $this->etatPv = $etatPv;
+
+        return $this;
+    }
+
+    /**
+     * Get etatPv
+     *
+     * @return boolean
+     */
+    public function getEtatPv()
+    {
+        return $this->etatPv;
     }
 }

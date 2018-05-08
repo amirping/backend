@@ -12,33 +12,36 @@
     <table class="table table-striped bring-up nth-2-center">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>ID</th>
                 <th>Matricule</th>
                 <th>Nom</th>
                 <th>Prenom</th>
                 <th>Adresse</th>
                 <th>Cin</th>
                 <th>Tel</th>
+                <th>Role</th>
                 <th>Actions</th>
+                
             </tr>
         </thead>
         <tbody>
         {% for user in users %}
             <tr>
-                <td><a href="{{ path('user_show', { 'id': user.id }) }}">{{ user.id }}</a></td>
-                <td>{{ user.matricule }}</td>
-                <td>{{ user.nom }}</td>
-                <td>{{ user.prenom }}</td>
-                <td>{{ user.adresse }}</td>
-                <td>{{ user.cin }}</td>
-                <td>{{ user.tel }}</td>
+                <td><a href="{{ path('user_show', { 'id': user['user'].id }) }}">{{ user['user'].id }}</a></td>
+                <td>{{ user['user'].matricule }}</td>
+                <td>{{ user['user'].nom }}</td>
+                <td>{{ user['user'].prenom }}</td>
+                <td>{{ user['user'].adresse }}</td>
+                <td>{{ user['user'].cin }}</td>
+                <td>{{ user['user'].tel }}</td>
+                <td>{{ user['role'][0] }}</td>
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('user_show', { 'id': user.id }) }}">show</a>
+                            <a href="{{ path('user_show', { 'id': user['user'].id }) }}">show</a>
                         </li>
                         <li>
-                            <a href="{{ path('user_edit', { 'id': user.id }) }}">edit</a>
+                            <a href="{{ path('user_edit', { 'id': user['user'].id }) }}">edit</a>
                         </li>
                     </ul>
                 </td>

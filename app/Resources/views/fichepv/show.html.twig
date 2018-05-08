@@ -10,26 +10,26 @@
 {% block pagecontent %}
     <h1>Fichepv</h1>
 
-    <table>
+    <table class="table table-striped bring-up nth-2-center">
         <tbody>
             <tr>
-                <th>Id</th>
+                <th>ID</th>
                 <td>{{ fichePv.id }}</td>
             </tr>
             <tr>
-                <th>Datepv</th>
+                <th>Date PV</th>
                 <td>{% if fichePv.datePv %}{{ fichePv.datePv|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Montantpv</th>
+                <th>Montant PV</th>
                 <td>{{ fichePv.montantPv }}</td>
             </tr>
             <tr>
-                <th>Matriculecont</th>
+                <th>Matricule</th>
                 <td>{{ fichePv.matriculeCont }}</td>
             </tr>
             <tr>
-                <th>Lieucontrole</th>
+                <th>Lieu De Controle</th>
                 <td>{{ fichePv.lieuControle }}</td>
             </tr>
             <tr>
@@ -37,23 +37,23 @@
                 <td>{{ fichePv.classe }}</td>
             </tr>
             <tr>
-                <th>Destinationreele</th>
+                <th>Destination réelle</th>
                 <td>{{ fichePv.destinationReele }}</td>
             </tr>
             <tr>
-                <th>Typeabonn</th>
+                <th>Type abonnement</th>
                 <td>{{ fichePv.typeAbonn }}</td>
             </tr>
             <tr>
-                <th>Durestationnement</th>
+                <th>Durée stationnement</th>
                 <td>{{ fichePv.dureStationnement }}</td>
             </tr>
             <tr>
-                <th>Type</th>
+                <th>Type Du PV</th>
                 <td>{{ fichePv.type }}</td>
             </tr>
             <tr>
-                <th>Datefinabon</th>
+                <th>Date fin abonnement</th>
                 <td>{% if fichePv.dateFinAbon %}{{ fichePv.dateFinAbon|date('Y-m-d') }}{% endif %}</td>
             </tr>
         </tbody>
@@ -68,7 +68,7 @@
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" value="Delete" class="btn btn-danger">
             {{ form_end(delete_form) }}
         </li>
     </ul>

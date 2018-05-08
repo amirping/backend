@@ -15,7 +15,7 @@
                 <th>ID PV</th>
                 <th>Date PV</th>
                 <th>Montant PV</th>
-                <th>Matriculecont</th>
+                <th>Matricule</th>
                 <th>Lieu De Controle</th>
                 <th>Classe</th>
                 <th>Destination réelle</th>
@@ -23,6 +23,7 @@
                 <th>Durée stationnement</th>
                 <th>Type Du PV</th>
                 <th>Date fin abonnement</th>
+                <th>Etat de pv</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -40,14 +41,22 @@
                 <td>{{ fichePv.dureStationnement }}</td>
                 <td>{{ fichePv.type }}</td>
                 <td>{% if fichePv.dateFinAbon %}{{ fichePv.dateFinAbon|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if fichePv.etatPv == 0 %} non-payé {% elseif fichePv.etatPv == 1 %} payé {% endif %}</td>
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('fichepv_show', { 'id': fichePv.id }) }}">show</a>
+                            <a href="{{ path('fichepv_show', { 'id': fichePv.id }) }}">Voir</a>
                         </li>
                         <li>
-                            <a href="{{ path('fichepv_edit', { 'id': fichePv.id }) }}">edit</a>
+                            <a href="{{ path('fichepv_edit', { 'id': fichePv.id }) }}">Edit</a>
                         </li>
+                        
+                        {% if fichePv.etatPv == 0 %}
+                        <li>
+                            <a href="{{ path('fichepv_payer', { 'id': fichePv.id }) }}">Payer Le PV</a>
+                        </li>
+                        {% endif %}
+                        
                     </ul>
                 </td>
             </tr>

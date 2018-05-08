@@ -133,4 +133,19 @@ class FichePvController extends Controller
             ->getForm()
         ;
     }
+
+    /**
+     * regler pv.
+     *
+     * @Route("/{id}/payer", name="fichepv_payer")
+     * @Method("GET")
+     */
+    public function payerAction(Request $request, FichePv $fichePv)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $fichePv->setEtatPv(true);
+        $em->flush();
+        return $this->redirectToRoute('fichepv_index');
+
+    }
 }

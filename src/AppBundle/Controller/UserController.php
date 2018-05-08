@@ -23,11 +23,17 @@ class UserController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
+        $userswithrole;
         $users = $em->getRepository('AppBundle:User')->findAll();
-
+        // for each
+        foreach ($users as $user) {
+            # code...
+            $usertmp =  array('user' => $user,'role'=>$user->getRoles() ); 
+            $userswithrole[] = $usertmp; 
+        } 
+        //
         return $this->render('user/index.html.twig', array(
-            'users' => $users,
+            'users' => $userswithrole,
         ));
     }
 

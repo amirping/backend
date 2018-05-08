@@ -9,10 +9,10 @@
 {% block pagecontent %}
     <h1>User</h1>
 
-    <table>
+    <table class="table table-striped bring-up nth-2-center">
         <tbody>
             <tr>
-                <th>Id</th>
+                <th>ID</th>
                 <td>{{ user.id }}</td>
             </tr>
             <tr>
@@ -51,7 +51,7 @@
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" value="Delete" class="btn btn-danger">
             {{ form_end(delete_form) }}
         </li>
     </ul>

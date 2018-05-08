@@ -20,8 +20,8 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('matricule')->add('nom')->add('prenom')->add('adresse')->add('cin')->add('tel')
-        ->add('email', EmailType::class, array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle'))
-        ->add('username', null, array('label' => 'form.username', 'translation_domain' => 'FOSUserBundle'))
+        ->add('email', EmailType::class, array('label' => 'E-mail', 'translation_domain' => 'FOSUserBundle'))
+        ->add('username', null, array('label' => 'Nom D`Utilisateur', 'translation_domain' => 'FOSUserBundle'))
         ->add('plainPassword', RepeatedType::class, array(
             'type' => PasswordType::class,
             'options' => array(
@@ -30,8 +30,8 @@ class UserType extends AbstractType
                     'autocomplete' => 'new-password',
                 ),
             ),
-            'first_options' => array('label' => 'form.password'),
-            'second_options' => array('label' => 'form.password_confirmation'),
+            'first_options' => array('label' => 'Mot De Passe'),
+            'second_options' => array('label' => 'Confirmation MDP'),
             'invalid_message' => 'fos_user.password.mismatch',
         ))
         ->add('roles', ChoiceType::class, [
