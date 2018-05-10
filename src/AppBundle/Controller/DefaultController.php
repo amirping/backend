@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\FichePv;
+use AppBundle\Entity\User;
 class DefaultController extends Controller
 {
     /**
@@ -27,7 +28,6 @@ class DefaultController extends Controller
             }
         }
         $fichepv_stat['per_paye'] = ($total_paye * 100)/count($fichePvs);
-
         // end stat for fiche pv
 
         $allstat['fichepv'] = $fichepv_stat;
@@ -35,4 +35,5 @@ class DefaultController extends Controller
             'stat' => $allstat
         ]);
     }
+    
 }
