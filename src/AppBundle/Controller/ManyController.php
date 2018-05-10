@@ -107,7 +107,9 @@ class ManyController extends FOSRestController
             $em->flush();
             $data = array("stat"=>true,"msg"=>"done");
             }
-            $data = array("stat"=>false,"msg"=>"not valid token");
+            else{
+            $data = array("stat"=>false,"msg"=>"not valid token");                
+            }
         }
         else{
             $data = array("stat"=>false,"msg"=>"missing arguments");
