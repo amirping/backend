@@ -34,7 +34,7 @@
         </thead>
         <tbody>
         {% for fichePv in fichePvs %}
-            <tr class="{% if date(fichePv.datePv) < date('-30hours') %}
+            <tr class="{% if date(fichePv.datePv) < date('-30days') %}
     bg-danger
 {% endif %}">
                 <td><a href="{{ path('fichepv_show', { 'id': fichePv.id }) }}">{{ fichePv.id }}</a></td>
