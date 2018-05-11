@@ -22,6 +22,17 @@ class DefaultController extends Controller
         $agent_stat = array();
         $fichePvs = $em->getRepository('AppBundle:FichePv')->findAll();
         $agents = $em->getRepository('AppBundle:User')->findAll();
+        /*
+         sql query to get the job done dude 
+        */
+        $connection = $em->getConnection();
+        $statement = $connection->prepare("SELECT fiche_pv.matricule_cont,agent.nom,agent.prenom, SUM(fiche_pv.montant_pv) as totalmoney ,count(fiche_pv.id) as totalnbr FROM fiche_pv INNER JOIN agent ON agent.matricule = fiche_pv.matricule_cont GROUP BY fiche_pv.matricule_cont ");
+        $statement->execute();
+        $results_pv_per_agent = $statement->fetchAll();
+        $agent_stat['pv_per_agent'] = $results_pv_per_agent;
+        /*
+        ww4 end 
+        */
         $fichepv_stat['nbr'] = count($fichePvs);
         $agent_stat['nbr'] = count($agents);
         $total_paye = 0 ;

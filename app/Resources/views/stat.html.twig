@@ -1,60 +1,127 @@
-{% extends 'baseAdmin.html.twig' %}
-
-
-{% block pagecontent %}
+{% extends 'baseAdmin.html.twig' %} {% block pagecontent %}
 <div class="row">
-    <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-red">
-            <div class="inner">
-              <h3>{{stat['fichepv']['nbr']}}</h3>
+  <div class="col-lg-3 col-xs-6">
+    <!-- small box -->
+    <div class="small-box bg-red">
+      <div class="inner">
+        <h3>{{stat['fichepv']['nbr']}}</h3>
 
-              <p>Nombres des PVs</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-pie-graph"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-            <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-        <div class="small-box bg-green">
-            <div class="inner">
-              <h3>{{stat['fichepv']['per_paye'] |slice(0, 6) }}<sup style="font-size: 20px">%</sup></h3>
-              <p>PVs Payée</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-stats-bars"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-        </div>
+        <p>Nombres des PVs</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-pie-graph"></i>
+      </div>
+      <a href="#" class="small-box-footer">More info
+        <i class="fa fa-arrow-circle-right"></i>
+      </a>
     </div>
-    <div class="col-lg-3 col-xs-6">
-  <!-- small box -->
-<div class="small-box bg-blue">
-    <div class="inner">
-      <h3>{{stat['fichepv']['montant'] }}</h3>
-      <p>Montant Total des pv</p>
+  </div>
+  <div class="col-lg-3 col-xs-6">
+    <!-- small box -->
+    <div class="small-box bg-green">
+      <div class="inner">
+        <h3>{{stat['fichepv']['per_paye'] |slice(0, 6) }}
+          <sup style="font-size: 20px">%</sup>
+        </h3>
+        <p>PVs Payée</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-stats-bars"></i>
+      </div>
+      <a href="#" class="small-box-footer">More info
+        <i class="fa fa-arrow-circle-right"></i>
+      </a>
     </div>
-    <div class="icon">
-      <i class="ion ion-usd"></i>
+  </div>
+  <div class="col-lg-3 col-xs-6">
+    <!-- small box -->
+    <div class="small-box bg-blue">
+      <div class="inner">
+        <h3>{{stat['fichepv']['montant'] }}</h3>
+        <p>Montant Total des pv</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-usd"></i>
+      </div>
+      <a href="#" class="small-box-footer">More info
+        <i class="fa fa-arrow-circle-right"></i>
+      </a>
     </div>
-    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+  </div>
+  <div class="col-lg-3 col-xs-6">
+    <!-- small box -->
+    <div class="small-box bg-yellow">
+      <div class="inner">
+        <h3>{{stat['agent']['nbr'] }}</h3>
+        <p>Nombre Total des Agents</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-person"></i>
+      </div>
+      <a href="#" class="small-box-footer">More info
+        <i class="fa fa-arrow-circle-right"></i>
+      </a>
+    </div>
+  </div>
+
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+        <h3 class="box-title">Incoming Pv Per Agent</h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+              <table id="example2" class="table table-striped table-bordered">
+                <thead>
+                  <tr>
+                  <th>Matricule controler</th>
+                  <th>Controler last name</th>
+                  <th>Controler name</th>                  
+                  <th>Montant Total des pv</th>
+                  <th>Nombre total des pv</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for statres in stat['agent']['pv_per_agent'] %}
+                  <tr>
+                    <td>{{ statres.matricule_cont }}</td>
+                    <td>{{ statres.nom }}</td>
+                    <td>{{ statres.prenom }}</td>
+                    <td>{{ statres.totalmoney }}</td>
+                    <td>{{ statres.totalnbr }}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+                <tfoot>
+                  <tr>
+                  <th>Matricule controler</th>
+                  <th>Controler last name</th>
+                  <th>Controler name</th>                  
+                  <th>Montant Total des pv</th>
+                  <th>Nombre total des pv</th>
+                  </tr>
+                </tfoot>
+              </table>
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+  <!-- /.col -->
+
 </div>
-</div>
-<div class="col-lg-3 col-xs-6">
-<!-- small box -->
-<div class="small-box bg-yellow">
-<div class="inner">
-  <h3>{{stat['agent']['nbr'] }}</h3>
-  <p>Nombre Total des Agents</p>
-</div>
-<div class="icon">
-  <i class="ion ion-person"></i>
-</div>
-<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-</div>
-</div>
-</div>
+{% block ownpagejs %}
+ <script>
+ $(function () {
+    $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    })
+  })
+ </script>
+ {% endblock %}
 {% endblock %}

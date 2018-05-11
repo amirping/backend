@@ -9,30 +9,37 @@
 {% block pagecontent %}
     <h1>Fichepvs list</h1>
 
-    <table class="table table-striped bring-up nth-2-center">
+    <div class="box">
+    <div class="box-header">
+        <h3 class="box-title">Liste des fiche pv</h3>
+      </div>
+      <div class="box-body">
+    <table id="fichpvtable" class="table  bring-up nth-2-center">
         <thead>
             <tr>
-                <th>ID PV</th>
-                <th>Date PV</th>
-                <th>Montant PV</th>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Montant</th>
                 <th>Matricule</th>
                 <th>Lieu De Controle</th>
                 <th>Classe</th>
                 <th>Destination réelle</th>
                 <th>Type abonnement</th>
                 <th>Durée stationnement</th>
-                <th>Type Du PV</th>
+                <th>Type</th>
                 <th>Date fin abonnement</th>
-                <th>Etat de pv</th>
+                <th>Etat</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for fichePv in fichePvs %}
-            <tr>
+            <tr class="{% if date(fichePv.datePv) < date('-30hours') %}
+    bg-danger
+{% endif %}">
                 <td><a href="{{ path('fichepv_show', { 'id': fichePv.id }) }}">{{ fichePv.id }}</a></td>
                 <td>{% if fichePv.datePv %}{{ fichePv.datePv|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ fichePv.montantPv }}</td>
+                <td>{{ fichePv.montantPv  }}</td>
                 <td>{{ fichePv.matriculeCont }}</td>
                 <td>{{ fichePv.lieuControle }}</td>
                 <td>{{ fichePv.classe }}</td>
@@ -63,10 +70,26 @@
         {% endfor %}
         </tbody>
     </table>
-
     <ul>
         <li>
             <a href="{{ path('fichepv_new') }}">Create a new fichePv</a>
         </li>
     </ul>
+    </div>
+</div>
+
+    {% block ownpagejs %}
+ <script>
+ $(function () {
+    $('#fichpvtable').DataTable({
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : true
+    })
+  })
+ </script>
+ {% endblock %}
 {% endblock %}
