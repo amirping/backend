@@ -66,9 +66,12 @@ class FichePvController extends Controller
     public function showAction(FichePv $fichePv)
     {
         $deleteForm = $this->createDeleteForm($fichePv);
-
+        $em = $this->getDoctrine()->getManager();
+        $id = $fichePv->getIdPass();
+        $passager = $em->getRepository('AppBundle:Passager')->findOneBy(['cin'=>$id]);
         return $this->render('fichepv/show.html.twig', array(
             'fichePv' => $fichePv,
+            'passager'=> $passager,
             'delete_form' => $deleteForm->createView(),
         ));
     }
