@@ -68,7 +68,7 @@ class FichePvController extends Controller
         $deleteForm = $this->createDeleteForm($fichePv);
         $em = $this->getDoctrine()->getManager();
         $id = $fichePv->getIdPass();
-        $passager = $em->getRepository('AppBundle:Passager')->findOneBy(['cin'=>$id]);
+        $passager = $em->getRepository('AppBundle:Passager')->findOneBy(['id'=>$id]);
         return $this->render('fichepv/show.html.twig', array(
             'fichePv' => $fichePv,
             'passager'=> $passager,
