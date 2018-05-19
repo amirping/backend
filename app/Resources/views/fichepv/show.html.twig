@@ -72,6 +72,9 @@
                 <th>Date fin abonnement</th>
                 <td>{% if fichePv.dateFinAbon %}{{ fichePv.dateFinAbon|date('Y-m-d') }}{% endif %}</td>
             </tr>
+            <tr>
+            <td colspan="2"><input type="button" onClick="PrintElem()" value="Print PV" class="btn btn-warning"></td>
+            </tr>
         </tbody>
     </table>
 
@@ -88,4 +91,88 @@
             {{ form_end(delete_form) }}
         </li>
     </ul>
+    <div style="visibility:hidden;position:relative;" id="printall"> 
+    <div style="display:block;float:left;text-align:left;width:100%;">
+        <h5>وزارة النقل</h5>    
+        <h5>الشركة الوطنية لسكك الحديدية التونسية</h5>
+        <h5>وحدة أعمال نقل المسافرين على الخطوط البعيدة</h5>
+    </div>
+    <div style="display:block;float:right;text-align:right;width:100%;">
+    <h5>...{{fichePv.id}}... محضر  رقم
+    </h5>
+    <h5>...{{ fichePv.datePv|date('Y-m-d') }}... محرر بتاريخ</h5>
+
+    </div>
+<div style="display:block;float:right;text-align:right;width:100%;">
+<h5 style="text-align: right;">
+ ...{{passager.Prenom}} {{passager.nom}}... إلى المدعو 
+</h5>
+<h5 style="text-align: right;">
+...{{passager.Adresse}}... العنوان
+</h5>
+</div>
+<div style="display:block;text-align: center;width:100%;">
+<b>
+أكيد جدا تنبيه دون تذكير
+</b>
+</div>
+<div style="display:block;float:right;text-align:right;width:100%;">
+<h5 style="text-align: right;">
+.الموضوع: مخالفة القانون عدد 74 لسنة 98 المؤرخ في 19 أوت 1998 المتعلق بالسكك الحديدية
+</h5>
+<p style="direction:rtl;text-align: right;">
+نذكر أنه بتاريخ ...{{fichePv.datePv|date('Y-m-d')}}... وقع ضبطك دون سند نقل على متن القطار
+رقم ...{{train}}... الرابط بين............................ و............................... خرقا بذلك القانون
+المذكور أعلاه، مستوجباً للتتبعات القضائية و العقوبات المنصوصة عليها بذات القانون و
+بالمقرر الوزاري عدد 776 المؤرخ في 18 أوت 2003, و طبقاً للفصل 315 من المجلة
+الجنائية في باب المخالفات.
+و لتسوية الوضعية يجب الاتصال بشبابيك الخطوط البعيدة بمحطة تونس للأرتال في أجل أقصاه
+شهر من تاريخ توصلك بهذا التنبيه الوحيد ودفع مبلغ ...{{ fichePv.montantPv }} دينار... معلوم المخالفة و المصاريف.
+</p>
+و في حال عدم التسوية الادارية قبل الأجل المضروب فان الشركة ستعرض المحضر على
+.انظار السيد وكيل الجمهورية بمحكمة مقر اقامتك لتتبعك عدلياً
+</div>
+<p style="text-align:left;width:100%">
+عن مدير الشؤون القانونية
+</p>                                                                                                                                                           
+    </div>
+    {% block ownpagejs %}
+ <script>
+ // printer 
+ function print(){
+     //var doc = new jsPDF()
+     
+    //doc.text(document.getElementById('printall'), 10, 10)
+ //doc.save('{{fichePv.id}}.pdf')
+   var element = document.getElementById('printall');
+    html2pdf(element ,{
+  margin:       1,
+  filename:     'myfile.pdf',
+  image:        { type: 'jpeg', quality: 0.98 },
+  html2canvas:  { dpi: 500, letterRendering: true },
+  jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+});
+ }
+ function PrintElem()
+{
+    var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+
+    mywindow.document.write('<html><head><title>' + document.title  + '</title>');
+    mywindow.document.write('<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">')
+    mywindow.document.write('<link rel="stylesheet" href="{{asset('bower_components/bootstrap/dist/css/bootstrap.min.css')}}">')
+    mywindow.document.write('<style type="text/css" media="print"> @page { size: auto; /* auto is the initial value */ margin: 0mm; /* this affects the margin in the printer settings */ } html { background-color: #FFFFFF; margin: 0px; /* this affects the margin on the html before sending to printer */ } body { margin: 10mm 15mm 10mm 15mm; /* margin you want for the content */ } </style>')  ;  
+    mywindow.document.write('</head><body >');
+    mywindow.document.write(document.getElementById("printall").innerHTML);
+    mywindow.document.write('</body></html>');
+
+    mywindow.document.close(); // necessary for IE >= 10
+    mywindow.focus(); // necessary for IE >= 10*/
+
+    mywindow.print();
+    mywindow.close();
+
+    return true;
+}
+ </script>
+ {% endblock %}
 {% endblock %}

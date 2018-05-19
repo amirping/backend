@@ -68,10 +68,13 @@ class FichePvController extends Controller
         $deleteForm = $this->createDeleteForm($fichePv);
         $em = $this->getDoctrine()->getManager();
         $id = $fichePv->getIdPass();
+        $id_train = $fichePv->getNumeroTrain();
         $passager = $em->getRepository('AppBundle:Passager')->findOneBy(['id'=>$id]);
+        $train = $em->getRepository('AppBundle:Train')->findOneBy(['id'=>$id_train]);
         return $this->render('fichepv/show.html.twig', array(
             'fichePv' => $fichePv,
             'passager'=> $passager,
+            'train'=> $id_train,
             'delete_form' => $deleteForm->createView(),
         ));
     }
