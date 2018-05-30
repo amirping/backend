@@ -85,11 +85,14 @@
         <li>
             <a href="{{ path('fichepv_edit', { 'id': fichePv.id }) }}">Edit</a>
         </li>
-        <li>
+        {% if is_granted('ROLE_SUPER_ADMIN') %} 
+         <li>
             {{ form_start(delete_form) }}
                 <input type="submit" value="Delete" class="btn btn-danger">
             {{ form_end(delete_form) }}
         </li>
+         {% endif %}
+       
     </ul>
     <div style="visibility:hidden;position:relative;" id="printall"> 
     <div style="display:block;float:left;text-align:left;width:100%;">
