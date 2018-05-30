@@ -81,6 +81,8 @@ fos_user:
     registration:
         form:
             type: AppBundle\Form\RegistrationType
+        confirmation:
+            enabled: false
 
 nelmio_api_doc: ~
 
@@ -97,12 +99,12 @@ fos_rest:
             json: true   
              
 
-fos_user:
-    db_driver: orm
-    firewall_name: api                                  # Seems to be used when registering user/reseting password,
-                                                        # but since there is no "login", as so it seems to be useless in
-                                                        # our particular context, but still required by "FOSUserBundle"
-    user_class: AppBundle\Entity\User
+# fos_user:
+#     db_driver: orm
+#     firewall_name: api                                  # Seems to be used when registering user/reseting password,
+#                                                         # but since there is no "login", as so it seems to be useless in
+#                                                         # our particular context, but still required by "FOSUserBundle"
+#     user_class: AppBundle\Entity\User
 fos_oauth_server:
     db_driver:           orm
     client_class:        AppBundle\Entity\Client
