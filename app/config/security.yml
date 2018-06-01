@@ -31,11 +31,12 @@ security:
 
     role_hierarchy:
         ROLE_CONTROLLEUR: ROLE_USER
-        ROLE_ADMIN_COMMERCIAL: ROLE_MANAGER
-        ROLE_ADMIN_JUREDIQUE: ROLE_MANAGER2
-        ROLE_SUPER_ADMIN: ROLE_ADMIN
+        ROLE_ADMIN_COMMERCIAL: ROLE_ADMIN
+        ROLE_ADMIN_JUREDIQUE: ROLE_ADMIN
+        ROLE_SUPER_ADMIN: ROLE_SUPER_ADMIN
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/, role: ROLE_ADMIN }
+        - { path: ^/api, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }

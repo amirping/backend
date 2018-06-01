@@ -22,6 +22,10 @@ class UserController extends Controller
      */
     public function indexAction()
     {
+        // deny access for jurdique 
+        if (!($this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN'))&&!($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN_COMMERCIAL'))) {
+            throw $this->createAccessDeniedException('GET OUT!');
+        }
         $em = $this->getDoctrine()->getManager();
         $userswithrole;
         $users = $em->getRepository('AppBundle:User')->findAll();
@@ -46,11 +50,19 @@ class UserController extends Controller
     public function newAction(Request $request)
     {
         $user = new User();
-        $form = $this->createForm('AppBundle\Form\UserType', $user);
+        $roleis="";
+        if($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN_COMMERCIAL')){
+            $roleis = "COMMERCIAL";
+        }
+        else{
+            $roleis = "OTHER";
+        }
+        $form = $this->createForm('AppBundle\Form\UserType', $user,array('role'=>$roleis));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $user->setEnabled(1);
             $em->persist($user);
             $em->flush();
 

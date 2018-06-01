@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 class UserType extends AbstractType
 {
@@ -19,6 +19,23 @@ class UserType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $roleofCurrent = $options['role'];
+        $choiceComercial = [
+            'ROLE_CONTROLLEUR' => 'ROLE_USER'
+        ];
+        $choiceOther = [
+            'ROLE_CONTROLLEUR' => 'ROLE_USER',
+            'ROLE_ADMIN_COMMERCIAL' => 'ROLE_ADMIN_COMMERCIAL',
+            'ROLE_ADMIN_JUREDIQUE' => 'ROLE_ADMIN_JUREDIQUE',
+            'ROLE_SUPER_ADMIN' => 'ROLE_SUPER_ADMIN',
+        ];
+        $choice_to_show;
+        if ($roleofCurrent == "COMMERCIAL") {
+            $choice_to_show = $choiceComercial;
+        }
+        else{
+            $choice_to_show = $choiceOther;
+        }
         $builder->add('matricule')->add('nom')->add('prenom')->add('adresse')->add('cin')->add('tel')
         ->add('email', EmailType::class, array('label' => 'E-mail', 'translation_domain' => 'FOSUserBundle'))
         ->add('username', null, array('label' => 'Nom D`Utilisateur', 'translation_domain' => 'FOSUserBundle'))
@@ -36,13 +53,7 @@ class UserType extends AbstractType
         ))
         ->add('roles', ChoiceType::class, [
             'multiple' => true,
-            'choices' => [
-                'ROLE_CONTROLLEUR' => 'ROLE_USER',
-                'ROLE_ADMIN_COMMERCIAL' => 'ROLE_MANAGER',
-                'ROLE_ADMIN_JUREDIQUE' => 'ROLE_MANAGER',
-                'ROLE_SUPER_ADMIN' => 'ROLE_ADMIN',
-            ]
-            
+            'choices' => $choice_to_show
         ]);
         ;
     }/**
@@ -51,7 +62,8 @@ class UserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\User'
+            'data_class' => 'AppBundle\Entity\User',
+            'role' => null
         ));
     }
 

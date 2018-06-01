@@ -15,6 +15,9 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        if (!($this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN'))&&!($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN_COMMERCIAL'))&&!($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN_JUREDIQUE'))) {
+            throw $this->createAccessDeniedException('GET OUT!');
+        }
         $allstat = array();
         // replace this example code with whatever you need
         $em = $this->getDoctrine()->getManager();

@@ -22,6 +22,9 @@ class FichePvController extends Controller
      */
     public function indexAction()
     {
+        if (!($this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN'))&&!($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN_COMMERCIAL'))&&!($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN_JUREDIQUE'))) {
+            throw $this->createAccessDeniedException('GET OUT!');
+        }
         $em = $this->getDoctrine()->getManager();
 
         $fichePvs = $em->getRepository('AppBundle:FichePv')->findAll();
